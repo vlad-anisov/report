@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="report_report_form" model="ir.ui.view">
+        <field name="name">report.report.form</field>
+        <field name="model">report.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="model_id" required="1"/>
+                            <field name="report_type"/>
+                            <field name="template_name" invisible="1"/>
+                            <field name="template" widget="binary" filename="template_name"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Python Code" name='code' autofocus="autofocus">
+                            <field name="code" widget="ace" options="{'mode': 'python'}"
+                                   placeholder="Enter Python code here. Help about Python expression is available in the help tab of this document."/>
+                        </page>
+
+                        <page string="Help" name="help_info" autofocus="autofocus">
+                            <div style="margin-top: 4px;">
+                                <h3>Help with Python expressions</h3>
+                                <p>Various fields may use Python code or Python expressions. The following variables can
+                                    be used:
+                                </p>
+                                <ul>
+                                    <li><code>env</code>: Odoo Environment on which the action is triggered
+                                    </li>
+                                    <li><code>model</code>: Odoo Model of the record on which the action is triggered;
+                                        is a void recordset
+                                    </li>
+                                    <li><code>record</code>: record on which the action is triggered; may be be void
+                                    </li>
+                                    <li><code>records</code>: recordset of all records on which the action is triggered
+                                        in multi mode; may be void
+                                    </li>
+                                    <li><code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>
+                                        timezone</code>: useful Python libraries
+                                    </li>
+                                    <li><code>log(message, level='info')</code>:logging function to record debug
+                                        information in <code>ir.logging</code> table
+                                    </li>
+                                    <li><code>UserError</code>: Warning Exception to use with
+                                        <code>raise</code>
+                                    </li>
+                                    <li>To return an action, assign:
+                                        <code>action = {...}</code>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <p>Example of Python code</p>
+                                    <code style='white-space: pre-wrap'>
+                                        partner_name = record.name + '_code' \n
+                                        env['res.partner'].create({'name': partner_name})
+                                    </code>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_report_tree" model="ir.ui.view">
+        <field name="name">report.report.tree</field>
+        <field name="model">report.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="model_id" required="1"/>
+                <field name="report_type"/>
+                <field name="template_name" invisible="1"/>
+                <field name="template" widget="binary" filename="template_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="report_report_action" model="ir.actions.act_window">
+        <field name="name">Report</field>
+        <field name="res_model">report.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="report_report_menu" action="report_report_action" name="Reports" sequence="300"
+              parent="base.menu_custom"/>
+
+</odoo>

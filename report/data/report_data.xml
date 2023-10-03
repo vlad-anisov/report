@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+
+        <record id="MAC_SN_CS41XX_report" model="report.report">
+            <field name="name">MAC SN CS41XX</field>
+            <field name="model_id" ref="stock.model_stock_production_lot"/>
+            <field name="report_type">pdf</field>
+            <field name="template" type="base64" file="report/templates/MACSNCS41XX.docx"/>
+            <field name="template_name">MACSNCS41XX.docx</field>
+        </record>
+
+        <record id="PN_CS41XX_report" model="report.report">
+            <field name="name">PN CS41XX</field>
+            <field name="model_id" ref="stock.model_stock_production_lot"/>
+            <field name="report_type">pdf</field>
+            <field name="template" type="base64" file="report/templates/PNCS41XX.docx"/>
+            <field name="template_name">PNCS41XX.docx</field>
+        </record>
+
+        <record id="shipment_details_xlsx_report" model="report.report">
+            <field name="name">Детализация отгрузки (XLSX)</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="report_type">xlsx</field>
+            <field name="template" type="base64" file="report/templates/ShipmentDetails.xlsx"/>
+            <field name="template_name">ShipmentDetails.xlsx</field>
+        </record>
+
+        <record id="shipment_details_pdf_report" model="report.report">
+            <field name="name">Детализация отгрузки (PDF)</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="report_type">pdf</field>
+            <field name="template" type="base64" file="report/templates/ShipmentDetails.xlsx"/>
+            <field name="template_name">ShipmentDetails.xlsx</field>
+        </record>
+
+    </data>
+</odoo>
